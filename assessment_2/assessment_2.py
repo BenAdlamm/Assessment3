@@ -1,6 +1,7 @@
 import pyodbc
 import tkinter as tk
 
+#Grabs Microsoft Database, extracts * (all) values from Movie_List and prints it
 def show_records():
     conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\2019002577\source\repos\assessment_2sol\assessment_2\data\assessment2.accdb;')
     
@@ -11,6 +12,7 @@ def show_records():
     for row in cursor.fetchall():
         print (row)
 
+#Grabs Database, inserts listed values into database. Commit saves changes
 def enter_record():
     ID = e1.get()
     Mname = e2.get()
