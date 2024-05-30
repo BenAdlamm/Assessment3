@@ -11,6 +11,17 @@ def show_records():
    
     for row in cursor.fetchall():
         print (row)
+        
+#Grabs Microsoft Database, extracts * from Customer_Details table and prints it
+def show_customers():
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\2019002577\source\repos\assessment_2sol\assessment_2\data\assessment2.accdb;')
+    
+    cursor = conn.cursor()
+    
+    cursor.execute('select * from Customer_Details')
+    
+    for row in cursor.fetchall():
+        print (row)
 
 #Grabs Database, inserts listed values into database. Commit saves changes
 def enter_record():
@@ -62,7 +73,7 @@ e7.grid(row=6, column=1)
 
 # Button group
 
-tk.Button(master, text="Show", command=show_records).grid(row=8, column=1)
+tk.Button(master, text="Show", command = lambda: [show_records(), show_customers()]).grid(row=8, column=1)
 tk.Button(master, text="Enter", command=enter_record).grid(row=8, column=0)
 tk.Button(master, text='Quit', command=master.quit).grid(row=8, column=2)
 
