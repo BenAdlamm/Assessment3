@@ -1,6 +1,9 @@
 import pyodbc
 import tkinter as tk
 
+formatTemp1 = '{0:<7}{1:<20}{2:<15}{3:<13}{4:<20}{5:<15}{6:15}'
+formatTemp2 = '{0:<7}{1:<15}{2:<20}{3:<20}{4:<18}{5:<25}'
+
 #Grabs Microsoft Database, extracts * (all) values from Movie_List and prints it
 def show_records():
     conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\2019002577\source\repos\assessment_2sol\assessment_2\data\assessment2.accdb;')
@@ -8,10 +11,16 @@ def show_records():
     cursor = conn.cursor()
     
     cursor.execute('select * from Movie_List')
-   
+
+    print(f'{"ID":<7}{"Movie Name":<20}{"Release Date":<15}{"Genre":<13}{"Maturity Rating":<20}{"Star Rating":<15}{"Views":<15}')
+    print(f'{"_":_<96}')
+
     for row in cursor.fetchall():
-        print (row)
-        
+        record = f'{row.ID:<7}{row.Movie_Name:<20}{row.Release_Date:<15}{row.Genre:<13}{row.Maturity_Rating:<20}{row.Star_Rating:<15}{row.Views:<15}'
+
+        print(record)
+
+    print('\n\n')
 #Grabs Microsoft Database, extracts * from Customer_Details table and prints it
 def show_customers():
     conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\2019002577\source\repos\assessment_2sol\assessment_2\data\assessment2.accdb;')
@@ -20,8 +29,13 @@ def show_customers():
     
     cursor.execute('select * from Customer_Details')
     
+    print(f'{"ID":<7}{"Customer Name":<15}{"Membership Type":<20}{"Customer Email":<20}{"Movies Watched":<18}{"Member Since":<25}')
+    print(f'{"_":_<93}')
+
     for row in cursor.fetchall():
-        print (row)
+        record = f'{row.ID:<7}{row.Customer_Name:<15}{row.Membership_Type:<20}{row.Customer_Email:<20}{row.Movies_Watched:<18}{row.Member_Since:<25}'
+
+        print(record)
 
 
 #Grabs Database, inserts listed values into database. Commit saves changes
