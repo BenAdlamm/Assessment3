@@ -23,6 +23,7 @@ def show_customers():
     for row in cursor.fetchall():
         print (row)
 
+
 #Grabs Database, inserts listed values into database. Commit saves changes
 def enter_record():
     ID = e1.get()
